@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vuejs - Vue-Resource Get Request</title>
+
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/form-login.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
+  </head>
+
+  <body>
+
+
+  <div class="main-content">
+
+    <!-- You only need this form and the form-login.css -->
+
+    <form class="form-login" id="vueApp" method="post" action="#">
+
+      <div class="form-log-in-with-email">
+
+        <div class="form-white-background">
+
+          <div class="form-title-row">
+            <h1>Log in</h1>
+          </div>
+
+          <div class="form-row">
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" v-model="email">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              <span>Password</span>
+              <input type="password" name="password" v-model="password">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <button v-show="email" v-on:click.prevent="loadUsers" type="submit">Log in</button>
+          </div>
+
+          <div class="form-row">
+            <button  v-on:click.prevent="prova" type="submit">Prova</button>
+          </div>
+
+        </div>
+
+        <a href="#" class="form-forgotten-password">Forgotten password &middot;</a>
+        <a href="#" class="form-create-an-account">Create an account &rarr;</a>
+
+      </div>
+
+      <!--<div class="form-sign-in-with-social">-->
+
+        <!--<div class="form-row form-title-row">-->
+          <!--<span class="form-title">Sign in with</span>-->
+        <!--</div>-->
+
+        <!--<a href="#" class="form-google-button">Google</a>-->
+        <!--<a href="#" class="form-facebook-button">Facebook</a>-->
+        <!--<a href="#" class="form-twitter-button">Twitter</a>-->
+
+      <!--</div>-->
+
+    </form>
+
+  </div>
+  <!--<div id="vueApp">-->
+    <!--<div class="container">-->
+      <!--<div class="row">-->
+        <!--<div class="col-sm-12">-->
+          <!--<a href="#"-->
+             <!--class="btn btn-success"-->
+             <!--@click.stop="loadUsers">Load Users</a>-->
+          <!--<a href="#"-->
+             <!--class="btn btn-success"-->
+             <!--@click.stop="loadJocs">Load Jocs</a>-->
+        <!--</div>-->
+      <!--</div> &lt;!&ndash; /row &ndash;&gt;-->
+
+      <!--<div class="row">-->
+        <!--<div class="col-sm-12">-->
+
+          <!--<h3>-->
+            <!--User List-->
+          <!--</h3>-->
+          <!--<ul>-->
+            <!--<li v-for="user in users">-->
+              <!--{{ user.id}} - {{ user.categoria }} - {{ user.URL }}-->
+            <!--</li>-->
+          <!--</ul>-->
+
+        <!--</div>-->
+      <!--</div> &lt;!&ndash; row &ndash;&gt;-->
+
+      <!--<div class="row" v-if="debug">-->
+        <!--<div class="col-sm-12">-->
+          <!--<h3>-->
+            <!--Vuejs Debug Data-->
+          <!--</h3>-->
+          <!--<pre>{{ $data | json }}</pre>-->
+        <!--</div>-->
+      <!--</div> &lt;!&ndash; /row &ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.16/vue-resource.min.js'></script>
+
+    <script src="assets/js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
