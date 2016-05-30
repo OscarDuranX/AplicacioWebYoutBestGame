@@ -8,15 +8,15 @@
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
     <script type="text/javascript" src="assets/js/jquery.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
+
     <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.js'></script>
     <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.16/vue-resource.min.js'></script>
-    <script type="text/javascript" src="assets/js/index.js"></script>
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 </head>
-<body>
+<body id="Vista">
 
-<header id="vueApp">
+<header>
     <div class="logo">
         <a href="index.html"><img src="assets/img/logo.png" title="Magnetic" alt="Magnetic"/></a>
     </div><!-- end logo -->
@@ -27,26 +27,26 @@
             <li><a href="index.html" class="selected">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">The Team</a></li>
-            <li><a href="#" v-on:click.prevent="prova" >Prova</a></li>
+            <li><a href="#" v-on:click.prevent="getToken" >Prova</a></li>
             <li><a href="#" v-on:click.prevent="loadJocs">Jocs</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 
-    <div class="footer clearfix">
-        <ul class="social clearfix">
-            <li><a href="#" class="fb" data-title="Facebook"></a></li>
-            <li><a href="#" class="google" data-title="Google +"></a></li>
-            <li><a href="#" class="behance" data-title="Behance"></a></li>
-            <!--<li><a href="#" class="twitter" data-title="Twitter"></a></li>
-            <li><a href="#" class="dribble" data-title="Dribble"></a></li>-->
-            <li><a href="#" class="rss" data-title="RSS"></a></li>
-        </ul><!-- end social -->
+    <!--<div class="footer clearfix">-->
+        <!--<ul class="social clearfix">-->
+            <!--<li><a href="#" class="fb" data-title="Facebook"></a></li>-->
+            <!--<li><a href="#" class="google" data-title="Google +"></a></li>-->
+            <!--<li><a href="#" class="behance" data-title="Behance"></a></li>-->
+            <!--&lt;!&ndash;<li><a href="#" class="twitter" data-title="Twitter"></a></li>-->
+            <!--<li><a href="#" class="dribble" data-title="Dribble"></a></li>&ndash;&gt;-->
+            <!--<li><a href="#" class="rss" data-title="RSS"></a></li>-->
+        <!--</ul>&lt;!&ndash; end social &ndash;&gt;-->
 
-        <div class="rights">
-            <p>Copyright © 2014 magnetic.</p>
-            <p>Template by <a href="">Pixelhint.com</a></p>
-        </div><!-- end rights -->
-    </div ><!-- end footer -->
+        <!--<div class="rights">-->
+            <!--<p>Copyright © 2014 magnetic.</p>-->
+            <!--<p>Template by <a href="">Pixelhint.com</a></p>-->
+        <!--</div>&lt;!&ndash; end rights &ndash;&gt;-->
+    <!--</div >&lt;!&ndash; end footer &ndash;&gt;-->
 </header><!-- end header -->
 
 <section class="main clearfix">
@@ -61,11 +61,38 @@
         </a>
     </div>
 
+    <template v-for="joc in jocs">
+        <vista-joc :nom.sync="joc.nom" :imatge="joc.imatge"></vista-joc>
+    </template>
 
 
+
+    <pre>{{ $data | json }}</pre>
 
 </section><!-- end main -->
-<pre>{{ $data | json }}</pre>
+
+
+<script type="text/template" id="Template_Vista-Joc">
+
+    <div class="work" >
+        <a href="#">
+            <img src="assets/img/work1.jpg" class="media" alt=""/>
+            <div class="caption">
+                <div class="work_title">
+                    <h1>{{ nom }} - {{ imatge }}</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+</script>
+
+
+<script type="text/javascript" src="assets/js/vista.js"></script>
+
+
+
 
 
 </body>
