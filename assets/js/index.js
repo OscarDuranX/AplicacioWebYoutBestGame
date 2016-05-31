@@ -12,7 +12,9 @@ new Vue({
       this.$http.post('http://localhost:8000/api/login?email='+this.email+'&password='+ this.password +'', function(data, status, request){
         if(status == 200)
         {
-          this.token = data;
+          // clean the token rare characters
+          this.token = data.replace(/"/g, '');
+
 
           localStorage.setItem('testObject', JSON.stringify(this.token));
 
@@ -20,6 +22,10 @@ new Vue({
         }
 
       });
+    },
+
+    EntraWebinvitat: function(){
+      window.location.href = '/AplicationYourBestGame/Vista.html';
     }
   }
 });

@@ -2,7 +2,7 @@
 <html xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Your Best Game</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
@@ -18,17 +18,21 @@
 
 <header>
     <div class="logo">
-        <a href="index.html"><img src="assets/img/logo.png" title="Magnetic" alt="Magnetic"/></a>
+        <a href="index.html"><img src="assets/img/logo.png" title="YourBestGame" alt="YourBestGame"/></a>
     </div><!-- end logo -->
 
     <div id="menu_icon"></div>
     <nav>
-        <ul>
-            <li><a href="index.html" class="selected">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">The Team</a></li>
-            <li><a href="#" v-on:click.prevent="getToken" >Prova</a></li>
-            <li><a href="#" v-on:click.prevent="loadJocs">Jocs</a></li>
+        <ul v-if="!token">
+            <li><a href="#">Register</a></li>
+            <li><a href="index.html">Login</a></li>
+        </ul>
+        <ul v-if="token">
+            <li><a href="Vista.html" class="selected">Home</a></li>
+            <li><a href="#" v-on:click.prevent="getToken">Prova Token</a></li>
+            <li><a href="#" v-on:click.prevent="loadMyGames">My Games</a></li>
+            <li><a href="#" v-on:click.prevent="">Add new game</a></li>
+            <li><a href="#" v-on:click.prevent="logout">LogOut</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 
@@ -36,30 +40,26 @@
         <!--<ul class="social clearfix">-->
             <!--<li><a href="#" class="fb" data-title="Facebook"></a></li>-->
             <!--<li><a href="#" class="google" data-title="Google +"></a></li>-->
-            <!--<li><a href="#" class="behance" data-title="Behance"></a></li>-->
-            <!--&lt;!&ndash;<li><a href="#" class="twitter" data-title="Twitter"></a></li>-->
-            <!--<li><a href="#" class="dribble" data-title="Dribble"></a></li>&ndash;&gt;-->
             <!--<li><a href="#" class="rss" data-title="RSS"></a></li>-->
         <!--</ul>&lt;!&ndash; end social &ndash;&gt;-->
 
         <!--<div class="rights">-->
-            <!--<p>Copyright © 2014 magnetic.</p>-->
-            <!--<p>Template by <a href="">Pixelhint.com</a></p>-->
+            <!--<p>Copyright © 2016 YourBestGame.</p>-->
         <!--</div>&lt;!&ndash; end rights &ndash;&gt;-->
     <!--</div >&lt;!&ndash; end footer &ndash;&gt;-->
 </header><!-- end header -->
 
 <section class="main clearfix">
-    <div class="work">
-        <a href="#">
-            <img src="assets/img/work1.jpg" class="media" alt=""/>
-            <div class="caption">
-                <div class="work_title">
-                    <h1>culpa qui officia deserunt mollit</h1>
-                </div>
-            </div>
-        </a>
-    </div>
+    <!--<div class="work">-->
+        <!--<a href="#">-->
+            <!--<img src="assets/img/work1.jpg" class="media" alt=""/>-->
+            <!--<div class="caption">-->
+                <!--<div class="work_title">-->
+                    <!--<h1>culpa qui officia deserunt mollit</h1>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</a>-->
+    <!--</div>-->
 
     <template v-for="joc in jocs">
         <vista-joc :nom.sync="joc.nom" :imatge="joc.imatge"></vista-joc>
