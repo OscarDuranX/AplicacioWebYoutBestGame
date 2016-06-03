@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Vue Router Example</title>
+
+
+    <style>
+        .v-link-active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- use v-link directive for navigation. -->
+        <a v-link="{ path: '/foo' }">Go to Foo</a>
+        <a v-link="{ path: '/bar' }">Go to Bar</a>
+    </p>
+    <!-- use router-view element as route outlet -->
+    <router-view></router-view>
+
+    <template id="prova1">
+
+        <div  v-for="joc in jocs">
+            {{ joc.id }}
+
+        </div>
+
+
+    </template>
+</div>
+
+<script src="assets/js/dist/vue.js"></script>
+<script type="text/javascript" src='assets/js/dist/vue%201.0.8v.js'></script>
+<script type="text/javascript" src="assets/js/dist/vue-router.js"></script>
+<script type="text/javascript" src='assets/js/dist/vue-resource.min.js'></script>
+
+
+<script src="example.js"></script>
+</body>
+</html>

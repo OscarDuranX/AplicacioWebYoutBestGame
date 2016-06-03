@@ -1,75 +1,145 @@
 
 
 
-Vue.component('vista-joc', {
 
-    template: '#Template_Vista-Joc',
-    props:['nom','imatge']
-});
+var Defecte = Vue.extend({
 
-new Vue({
-    el: '#Vista',
-    data: {
-        jocs: [],
-        token: ""
-    },
-    methods: {
-        loadJocs: function() {
-            this.$http.get('http://localhost:8000/joc', function(data, status, request){
-                if(status == 200)
-                {
-                    this.jocs = data['data'];
-                }
-                else{
-                    console.log("no funciona!");
-                }
-            });
-        },
-        loadMyGames: function(){
-            this.$http.get('http://localhost:8000/user/joc?api_token='+this.token, function(data, status, request){
-                if(status == 200)
-                {
-                    this.jocs = data['data'];
-                }
-                else{
-                    console.log("no funciona!");
-                }
-            });
+    template: '#home' ,
 
-        },
-
-        getToken: function(){
-
-            this.token = localStorage.getItem('testObject');
-
-            console.log('retrievedObject: ',JSON.parse(this.token));
-            //console.log('http://localhost:8000/user/joc?api_token='+this.token);
-        },
-
-        logout: function(){
-            this.token = null;
-            localStorage.setItem('testObject', "");
+    data: function() {
+        return {
+            jocs: '',
+            token: this.token
         }
-
     },
-    ready: function(){
-        this.$http.get('http://localhost:8000/joc', function(data, status, request){
-            if(status == 200)
-            {
-                this.jocs = data['data'];
-            }
-            else{
-                console.log("no funciona!");
-            }
-        });
 
-        this.token = localStorage.getItem('testObject').replace(/"/g, '');
+    ready: function(){
+
+        this.getToken();
+        this.getJocs();
+        console.log(this.token);
+    },
+    methods:{
+
+        getJocs: function() {
+            this.$http.get('http://yourbestgameapi.app/joc', function(data, status, request){
+                if(status == 200)
+                {
+
+                    this.jocs = data['data'];
+
+                }
+                else{
+                    console.log("no funciona!");
+                }
+            });
+        },
+
+        getToken: function() {
+            this.token = localStorage.getItem('testObject').replace(/"/g, '');
+        }
+    }
+})
+
+var Logout = Vue.extend({
+
+    template: '#home' ,
+
+    ready: function(){
+        localStorage.setItem('testObject', "");
+        //this.$route.router.go('/');
+        location.href = '/AplicationYourBestGame/Vista.html';
+
     }
 
+})
 
-});
+var MyGames = Vue.extend({
 
+    template: '#jocsuser' ,
 
+    data: function() {
+        return {
+            jocs: '',
+            token: ''
+        }
+    },
+
+    ready: function(){
+        this.token = localStorage.getItem('testObject').replace(/"/g, '');
+
+        this.getJocsUser();
+    },
+    methods:{
+        getJocsUser: function() {
+            this.$http.get('http://yourbestgameapi.app/user/joc?api_token='+this.token, function(data, status, request){
+                if(status == 200)
+                {
+                    this.jocs = data['data'];
+                }
+                else{
+                    console.log("no funciona!");
+                }
+            });
+        },
+
+    }
+})
+
+var AddNewGame = Vue.extend({
+
+    template: '#AddNewGameUser' ,
+
+    data: function() {
+        return {
+            nom:''
+        }
+    },
+
+    ready: function(){
+
+    },
+    methods:{
+        CreateGame: function() {
+
+           //console.log('Provando');
+        },
+
+    }
+})
+
+var App = Vue.extend({
+    data:function(){
+        return {
+            token: ""
+        }
+    },
+    ready: function(){
+        this.token = localStorage.getItem('testObject').replace(/"/g, '');
+        console.log("funciona token ! "+ this.token);
+    }
+})
+
+var router = new VueRouter()
+
+router.map({
+    '/': {
+        component: Defecte
+    },
+
+    '/MyGames':{
+        component: MyGames
+    },
+    '/Logout':{
+        component: Logout
+    },
+    '/AddNewGame':{
+        component: AddNewGame
+    },
+
+})
+
+router.start(App, '#Vista')
 
 
 

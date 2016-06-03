@@ -9,7 +9,7 @@ new Vue({
   },
   methods: {
     loadUsers: function() {
-      this.$http.post('http://localhost:8000/api/login?email='+this.email+'&password='+ this.password +'', function(data, status, request){
+      this.$http.post('http://yourbestgameapi.app/api/login?email='+this.email+'&password='+ this.password +'', function(data, status, request){
         if(status == 200)
         {
           // clean the token rare characters

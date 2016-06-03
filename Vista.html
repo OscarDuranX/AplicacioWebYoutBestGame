@@ -6,11 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-    <script type="text/javascript" src="assets/js/jquery.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
 
-    <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.js'></script>
-    <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.16/vue-resource.min.js'></script>
 
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 </head>
@@ -22,17 +18,16 @@
     </div><!-- end logo -->
 
     <div id="menu_icon"></div>
-    <nav>
+    <nav id="menu_token">
         <ul v-if="!token">
             <li><a href="#">Register</a></li>
             <li><a href="index.html">Login</a></li>
         </ul>
-        <ul v-if="token">
+        <ul v-else>
             <li><a href="Vista.html" class="selected">Home</a></li>
-            <li><a href="#" v-on:click.prevent="getToken">Prova Token</a></li>
-            <li><a href="#" v-on:click.prevent="loadMyGames">My Games</a></li>
-            <li><a href="#" v-on:click.prevent="">Add new game</a></li>
-            <li><a href="#" v-on:click.prevent="logout">LogOut</a></li>
+            <li><a v-link="{ path: '/MyGames' }">My Games</a></li>
+            <li><a v-link="{ path: '/AddNewGame' }">Add new game</a></li>
+            <li><a v-link="{ path: '/Logout' }">LogOut</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 
@@ -50,43 +45,111 @@
 </header><!-- end header -->
 
 <section class="main clearfix">
-    <!--<div class="work">-->
-        <!--<a href="#">-->
-            <!--<img src="assets/img/work1.jpg" class="media" alt=""/>-->
-            <!--<div class="caption">-->
-                <!--<div class="work_title">-->
-                    <!--<h1>culpa qui officia deserunt mollit</h1>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</a>-->
-    <!--</div>-->
 
-    <template v-for="joc in jocs">
-        <vista-joc :nom.sync="joc.nom" :imatge="joc.imatge"></vista-joc>
-    </template>
+    <router-view></router-view>
 
-
-
-    <pre>{{ $data | json }}</pre>
 
 </section><!-- end main -->
 
+<template id="home">
 
-<script type="text/template" id="Template_Vista-Joc">
-
-    <div class="work" >
+    <div class="work" v-for="joc in jocs" >
         <a href="#">
             <img src="assets/img/work1.jpg" class="media" alt=""/>
             <div class="caption">
                 <div class="work_title">
-                    <h1>{{ nom }} - {{ imatge }}</h1>
+                    <h1>{{ joc.nom }} - {{ joc.imatge }}</h1>
                 </div>
             </div>
         </a>
     </div>
 
+</template>
 
-</script>
+<template id="jocsuser">
+
+    <div class="work" v-for="joc in jocs" >
+        <a href="#">
+            <img src="assets/img/work1.jpg" class="media" alt=""/>
+            <div class="caption">
+                <div class="work_title">
+                    <h1>{{ joc.nom }} - {{ joc.imatge }}</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+
+</template>
+
+<template id="AddNewGameUser">
+
+    <section class="top">
+        <div class="wrapper content_header clearfix">
+            <div class="work_nav">
+
+                <!--<ul class="btn clearfix">-->
+                    <!--<li><a href="#" class="previous" data-title="Previous"></a></li>-->
+                    <!--<li><a href="index.html" class="grid" data-title="Portfolio"></a></li>-->
+                    <!--<li><a href="#" class="next" data-title="Next"></a></li>-->
+                    <!--<a href="#" v-on:click.prevent="CreateGame">Prova</a>-->
+                <!--</ul>-->
+
+            </div><!-- end work_nav -->
+            <h1 class="title">Sed do eiusmod tempor incididunt ut labore et dolore seed magna aliqua.</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+            <p>Nunc pellentesque mauris ut magna pulvinar, quis fermentum tellus pulvinar. Curabitur ut fermentum quam. Nam tincidunt sagittis neque in elementum. Fusce convallis cursus porta. Curabitur dapibus pretium leo, at laoreet magna ullamcorper ac. Integer quam nulla, fringilla ac imperdiet at, consequat vel leo. Quisque non semper justo, eu aliquam velit. Pellentesque rhoncus, quam ac fringilla euismod, ligula diam congue orci, id cursus dui velit quis ligula.</p>
+
+
+            <h2>Nulla nec pellentesque tempus, ipsum arcu aliquam tortor.</h2>
+
+            <p>vel tempus libero diam vel arcu. Etiam id tincidunt tortor. Nam auctor consequat quam, vel mattis dui laoreet a. Nunc condimentum iaculis tortor, id eleifend nulla mattis lobortis. Pellentesque semper blandit odio, id tempor lorem imperdiet eu. Ut sagittis sagittis consectetur ,Maecenas eget risus eros. Nunc venenatis ante a rutrum cursus.</p>
+
+            <h2>Quisque non semper justo</h2>
+
+            <p>Commodo at blandit vitae, placerat in sem. Morbi ornare nec felis in euismod. Suspendisse vulputate orci ultrices enim facilisis, vel lobortis magna rhoncus. Integer mattis at elit vitae adipiscing. Cras imperdiet cursus nunc quis ullamcorper.</p>
+
+            <p>vel tempus libero diam vel arcu. Etiam id tincidunt tortor. Nam auctor consequat quam, vel mattis dui laoreet a. Nunc condimentum iaculis tortor, id eleifend nulla mattis lobortis. Pellentesque semper blandit odio, id tempor lorem imperdiet eu. Ut sagittis sagittis consectetur ,Maecenas eget risus eros. Nunc venenatis ante a rutrum cursus.</p>
+
+
+            <p>Commodo at blandit vitae, placerat in sem. Morbi ornare nec felis in euismod. Suspendisse vulputate orci ultrices enim facilisis, vel lobortis magna rhoncus. Integer mattis at elit vitae adipiscing. Cras imperdiet cursus nunc quis ullamcorper.</p>
+
+
+            <h1>H1 : Quisque non semper justo</h1>
+            <h2>H2 : Quisque non semper justo</h2>
+            <h3>H3 : Quisque non semper justo</h3>
+            <h4>H4 : Quisque non semper justo</h4>
+            <h5>H5 : Quisque non semper justo</h5>
+            <h6>H6 : Quisque non semper justo</h6>
+        </div><!-- end content -->
+    </section>
+
+</template>
+
+<!--<script type="text/template" id="Template_Vista-Joc">-->
+
+    <!--<div class="work" >-->
+        <!--<a href="#">-->
+            <!--<img src="assets/img/work1.jpg" class="media" alt=""/>-->
+            <!--<div class="caption">-->
+                <!--<div class="work_title">-->
+                    <!--<h1>{{ nom }} - {{ imatge }}</h1>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</a>-->
+    <!--</div>-->
+
+<!--</script>-->
+
+<script type="text/javascript" src="assets/js/dist/jquery.js"></script>
+<script type="text/javascript" src="assets/js/dist/main.js"></script>
+<script src="assets/js/dist/vue.js"></script>
+<script type="text/javascript" src='assets/js/dist/vue%201.0.8v.js'></script>
+<script type="text/javascript" src="assets/js/dist/vue-router.js"></script>
+<script type="text/javascript" src='assets/js/dist/vue-resource.min.js'></script>
 
 
 <script type="text/javascript" src="assets/js/vista.js"></script>
