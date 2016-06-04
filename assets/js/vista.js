@@ -92,7 +92,10 @@ var AddNewGame = Vue.extend({
 
     data: function() {
         return {
-            nom:''
+            nom:'',
+            imagen:'',
+            URLGame:'',
+            categoria:''
         }
     },
 
